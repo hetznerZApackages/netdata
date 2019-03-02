@@ -1,0 +1,15 @@
+Author: Lennart Weller <lhw@ring0.de>
+Description: Remove file serve restrictions for symlinks.
+
+diff -Naurp netdata.orig/web/server/web_client.c netdata/web/server/web_client.c
+--- netdata.orig/web/server/web_client.c
++++ netdata/web/server/web_client.c
+@@ -376,7 +376,7 @@ int mysendfile(struct web_client *w, cha
+     int done = 0;
+     while(!done) {
+         // check if the file exists
+-        if (lstat(webfilename, &statbuf) != 0) {
++        if (stat(webfilename, &statbuf) != 0) {
+             debug(D_WEB_CLIENT_ACCESS, "%llu: File '%s' is not found.", w->id, webfilename);
+             w->response.data->contenttype = CT_TEXT_HTML;
+             buffer_strcat(w->response.data, "File does not exist, or is not accessible: ");

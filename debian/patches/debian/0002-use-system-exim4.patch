@@ -1,0 +1,12 @@
+Author: Sven Hartge <sven@svenhartge.de>
+Description: Debian has exim in /usr/sbin which is not in the default path.
+
+diff -Naurp netdata.orig/collectors/python.d.plugin/exim/exim.conf netdata/collectors/python.d.plugin/exim/exim.conf
+--- netdata.orig/collectors/python.d.plugin/exim/exim.conf
++++ netdata/collectors/python.d.plugin/exim/exim.conf
+@@ -88,4 +88,4 @@ update_every: 10
+ # AUTO-DETECTION JOBS
+ 
+ local:
+-  command: 'exim -bpc'
++  command: '/usr/sbin/exim -bpc'

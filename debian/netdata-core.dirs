@@ -1,0 +1,6 @@
+etc/netdata
+usr/share/netdata/web
+var/cache/netdata
+var/lib/netdata
+var/log/netdata
+var/run

@@ -1,0 +1,2 @@
+# Versions are way off
+netdata-web: embedded-javascript-library usr/share/netdata/web/lib/jquery-2.2.4.min.js *

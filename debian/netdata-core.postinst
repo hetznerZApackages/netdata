@@ -1,0 +1,53 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	configure)
+		# creating group
+		if ! getent group netdata > /dev/null 2>&1
+		then
+			 groupadd --system netdata
+		fi
+
+		# creating user
+		if ! getent passwd netdata > /dev/null 2>&1
+		then
+			useradd --system -g netdata --home-dir /var/lib/netdata --no-create-home netdata
+			mkdir -p /var/lib/netdata
+		fi
+
+		# creating directory overrides
+		for DIRECTORY in /var/cache/netdata /var/lib/netdata
+		do
+			mkdir -p "${DIRECTORY}"
+
+			if ! dpkg-statoverride --list "${DIRECTORY}" > /dev/null 2>&1
+			then
+				dpkg-statoverride --update --add netdata netdata 0755 "${DIRECTORY}"
+			fi
+		done
+
+		# handling plugin capabilities (or setuid as fallback)
+		chown -R root:netdata /usr/lib/netdata/plugins.d
+		setcap cap_dac_read_search,cap_sys_ptrace+ep /usr/lib/netdata/plugins.d/apps.plugin || \
+			chmod 4754 /usr/lib/netdata/plugins.d/apps.plugin
+
+		# handling log owner and permissions
+		chown netdata:adm /var/log/netdata
+		chmod 2750 /var/log/netdata
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+#DEBHELPER#
+
+exit 0

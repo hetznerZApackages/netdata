@@ -1,0 +1,27 @@
+Author: Federico Ceratto <federico@debian.org>
+Description: remove Sign In button from main HTML page
+
+--- a/web/gui/index.html
++++ b/web/gui/index.html
+@@ -1228,8 +1228,6 @@
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+-                    <h4 class="modal-title" id="signInModalLabel">Sign In</h4>
+                 </div>
+                 <div class="modal-body">
+                     <p>
+--- a/web/gui/main.js
++++ b/web/gui/main.js
+@@ -4748,9 +4748,7 @@
+         container.setAttribute("data-original-title", "sign in");
+         container.setAttribute("data-placement", "bottom");
+         container.innerHTML = (
+-            `<a href="#" class="btn" onclick="signInDidClick(event); return false">
+-                <i class="fas fa-sign-in-alt"></i>&nbsp;<span class="hidden-sm hidden-md">Sign In</span>
+-            </a>`
++            ``
+         )
+     }
+ }

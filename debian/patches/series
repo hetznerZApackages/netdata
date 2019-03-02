@@ -1,0 +1,11 @@
+debian/0001-use-system-python.patch
+debian/0002-use-system-exim4.patch
+debian/0003-use-python3.patch
+debian/0004-use-sh.patch
+debian/0005-remove-infographic.patch
+debian/0006-remove-contrib-files.patch
+debian/0007-remove-update-button.patch
+debian/0008-remove-social-media-buttons.patch
+debian/0009-remove-googleanalytics.patch
+upstream/0001-allow-symlinks.patch
+debian/0010-remove-login.patch

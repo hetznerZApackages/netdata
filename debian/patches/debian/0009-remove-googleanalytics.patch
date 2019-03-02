@@ -1,0 +1,100 @@
+Author: Lennart Weller <lhw@ring0.de>
+Subject: Remove googleanalytics
+
+diff -Naurp netdata.orig/docs/generator/custom/themes/material/partials/footer.html netdata/docs/generator/custom/themes/material/partials/footer.html
+--- netdata.orig/docs/generator/custom/themes/material/partials/footer.html
++++ netdata/docs/generator/custom/themes/material/partials/footer.html
+@@ -51,7 +51,6 @@
+     </div>
+   </div>
+ </footer>
+-<script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-64295674-3",""),ga("set","anonymizeIp",!0),ga("send","pageview","/doc"+window.location.pathname);var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(a){a.host!=document.location.host&&a.addEventListener("click",function(){var e=a.getAttribute("data-md-action")||"follow";ga("send","event","outbound",e,a.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+ <script>
+   let currentLang = getLanguage();
+ 
+diff -Naurp netdata.orig/web/gui/demosites2.html netdata/web/gui/demosites2.html
+--- netdata.orig/web/gui/demosites2.html
++++ netdata/web/gui/demosites2.html
+@@ -1096,17 +1096,4 @@
+     </div>
+ </div>
+ </body>
+-<script>
+-    // google analytics when this is used for the home page of the demo sites
+-    // you don't need this if you customize this dashboard for your needs
+-    setTimeout(function() {
+-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+-
+-        ga('create', 'UA-64295674-3', 'auto');
+-        ga('send', 'pageview');
+-    }, 2000);
+-</script>
+ </html>
+diff -Naurp netdata.orig/web/gui/demosites.html netdata/web/gui/demosites.html
+--- netdata.orig/web/gui/demosites.html
++++ netdata/web/gui/demosites.html
+@@ -1417,14 +1417,6 @@ p {
+         }(c)))
+     }
+ 
+-    function o() {
+-        !function (t, e, a, n, o, i) {
+-            t.GoogleAnalyticsObject = n, t[n] || (t[n] = function () {
+-                (t[n].q = t[n].q || []).push(arguments)
+-            }), t[n].l = +new Date, o = e.createElement(a), i = e.getElementsByTagName(a)[0], o.src = "//www.google-analytics.com/analytics.js", i.parentNode.insertBefore(o, i)
+-        }(t, r, "script", "ga"), ga("create", "UA-64295674-3", "auto"), ga("send", "pageview", "/site"+window.location.pathname), t.document.addEventListener("click", n)
+-    }
+-
+     function i() {
+         !function (t, e, a) {
+             var n, o = t.getElementsByTagName(e)[0];
+diff -Naurp netdata.orig/web/gui/infographic.html netdata/web/gui/infographic.html
+--- netdata.orig/web/gui/infographic.html
++++ netdata/web/gui/infographic.html
+@@ -126,14 +126,6 @@
+         }(c)))
+     }
+ 
+-    function o() {
+-        !function (t, e, a, n, o, i) {
+-            t.GoogleAnalyticsObject = n, t[n] || (t[n] = function () {
+-                (t[n].q = t[n].q || []).push(arguments)
+-            }), t[n].l = +new Date, o = e.createElement(a), i = e.getElementsByTagName(a)[0], o.src = "//www.google-analytics.com/analytics.js", i.parentNode.insertBefore(o, i)
+-        }(t, r, "script", "ga"), ga("create", "UA-64295674-3", "auto"), ga("send", "pageview"), t.document.addEventListener("click", n)
+-    }
+-
+     function i() {
+         !function (t, e, a) {
+             var n, o = t.getElementsByTagName(e)[0];
+diff -Naurp netdata.orig/web/gui/main.js netdata/web/gui/main.js
+--- netdata.orig/web/gui/main.js
++++ netdata/web/gui/main.js
+@@ -4354,25 +4354,6 @@ function finalizePage() {
+                 $('#welcomeModal').modal();
+             }, 1000);
+         }
+-
+-        // google analytics when this is used for the home page of the demo sites
+-        // this does not run on user's installations
+-        setTimeout(function () {
+-            (function (i, s, o, g, r, a, m) {
+-                i['GoogleAnalyticsObject'] = r;
+-                i[r] = i[r] || function () {
+-                    (i[r].q = i[r].q || []).push(arguments)
+-                }, i[r].l = 1 * new Date();
+-                a = s.createElement(o),
+-                    m = s.getElementsByTagName(o)[0];
+-                a.async = 1;
+-                a.src = g;
+-                m.parentNode.insertBefore(a, m)
+-            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+-
+-            ga('create', 'UA-64295674-3', 'auto');
+-            ga('send', 'pageview', '/demosite/' + window.location.host);
+-        }, 2000);
+     } else {
+         notifyForUpdate();
+     }

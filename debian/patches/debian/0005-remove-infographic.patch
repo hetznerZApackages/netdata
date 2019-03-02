@@ -1,0 +1,14 @@
+Author: Lennart Weller <lhw@ring0.de>
+Description: Remove infographic for privacy breach reasons.
+
+diff -Naurp netdata.orig/web/gui/Makefile.am netdata/web/gui/Makefile.am
+--- netdata.orig/web/gui/Makefile.am
++++ netdata/web/gui/Makefile.am
+@@ -61,7 +61,6 @@ dist_web_DATA = \
+ 	index.html \
+ 	main.css \
+ 	main.js \
+-	infographic.html \
+ 	robots.txt \
+ 	refresh-badges.js \
+ 	sitemap.xml \

@@ -1,0 +1,3 @@
+etc/netdata/node.d
+usr/lib/netdata/conf.d/node.d.conf
+usr/lib/netdata/node.d

@@ -1,0 +1,5 @@
+# Long lines in source files
+netdata source: source-is-missing web/gui/dashboard_info.js line length is 522 characters (>512)
+netdata source: source-is-missing web/gui/goto-host-from-alarm.html line length is 299 characters (>256)
+netdata source: source-is-missing web/gui/main.js line length is 299 characters (>256)
+netdata source: source-is-missing web/gui/lib/clipboard-polyfill-be05dad.js line length is 3855 characters (>512)

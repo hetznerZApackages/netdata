@@ -1,0 +1,12 @@
+Author: Daniel Baumann <daniel.baumann@progress-linux.org>
+Description: Fix shebang hack to not depend on bash.
+
+diff -Naurp netdata.orig/collectors/node.d.plugin/node.d.plugin.in netdata/collectors/node.d.plugin/node.d.plugin.in
+--- netdata.orig/collectors/node.d.plugin/node.d.plugin.in
++++ netdata/collectors/node.d.plugin/node.d.plugin.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env bash
++#!/bin/sh
+ ':' //; exec "$(command -v nodejs || command -v node || echo "ERROR node IS NOT AVAILABLE IN THIS SYSTEM")" "$0" "$@"
+ 
+ // shebang hack from:

@@ -1,0 +1,31 @@
+* package splitting:
+  - think about a workaround for not having the dh_missing for debian/tmp-no-sse
+    (e.g. diff the core and core-no-sse file lists?)
+  - add alternative depends on core and core-no-sse via substvars on affected
+    archtectures only
+  - split out arch-all stuff from core/core-no-sse to netdata-common or so
+    (check if worthwile; micropackaging vs. lazy)
+  - add netdata-doc if htmldoc is buildable again
+  - enable "expensive" plugins (--enable-plugin-nfacct --enable-plugin-cups --with-libcap)
+    and move them to plugins-extra.
+
+* migrate from user 'netdata' to '_netdata'.
+
+* add multiselect preseeding for netdata-web (as if it's netdata-apache2,
+  containing apache2 conf snipped to enable netdata via reverse proxy
+  and (optional) basic auth)
+
+* finish ucf handling for netdata.conf
+
+* keep depends minimal and put everything to recommends/suggests
+
+* check netdata.conf, netdata.init, netdata.service etc. with upstream
+
+* check if freeipmi plugin can be run with caps instead setuid
+
+* netdata.conf: preseeding of ip, port, registry, and history.
+
+* upstream:
+  - 'netdata -W set' seems broken
+  - update to bootstrap 4
+  - switch to fonts-fork-awesome

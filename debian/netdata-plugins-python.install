@@ -1,0 +1,4 @@
+etc/netdata/python.d
+usr/lib/netdata/conf.d/python.d
+usr/lib/netdata/conf.d/python.d.conf
+usr/lib/netdata/python.d

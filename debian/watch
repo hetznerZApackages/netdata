@@ -1,0 +1,2 @@
+version=4
+https://github.com/netdata/netdata/releases/ download/v(?:\d\S*)/netdata-v(\d\S*)\.(?:tar\.(?:gz|xz))

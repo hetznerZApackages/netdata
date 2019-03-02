@@ -1,0 +1,176 @@
+#!/usr/bin/make -f
+
+TOP = $(CURDIR)/debian/netdata
+
+PACKAGES := $(shell dh_listpackages -a)
+
+VERSION := $(shell dpkg-parsechangelog -SVersion)
+VERSION_MAJOR := $(word 1, $(subst ., ,$(VERSION)))
+VERSION_MINOR := $(word 2, $(subst ., ,$(VERSION)))
+VERSION_FIX := $(word 3, $(subst -, ,$(subst ., ,$(VERSION))))
+VERSION_SUFFIX := -$(word 4, $(subst -, ,$(subst ., ,$(VERSION))))
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_CFLAGS_MAINT_APPEND  = -Wall -O3
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+%:
+	dh $@
+
+override_dh_autoreconf:
+	rm -f debian/configure.ac.orig
+	cp configure.ac debian/configure.ac.orig
+
+	sed -i	-e 's/^\(define(\[VERSION_MAJOR]\).*/\1, [$(VERSION_MAJOR)])/' \
+		-e 's/^\(define(\[VERSION_MINOR]\).*/\1, [$(VERSION_MINOR)])/' \
+		-e 's/^\(define(\[VERSION_FIX]\).*/\1, [$(VERSION_FIX)])/' \
+		-e 's/^\(define(\[VERSION_SUFFIX]\).*/\1, [$(VERSION_SUFFIX)])/' \
+	configure.ac
+
+	dh_autoreconf
+
+override_dh_autoreconf_clean:
+	if [ -e debian/configure.ac.orig ]; \
+	then \
+		rm -f configure.ac; \
+		mv debian/configure.ac.orig configure.ac; \
+	fi
+
+	dh_autoreconf_clean
+
+override_dh_auto_clean:
+	dh_auto_clean
+
+	rm -rf build-core
+	rm -rf build-core-no-sse debian/tmp-core-no-sse
+
+override_dh_auto_configure:
+	mkdir -p build-core
+	dh_auto_configure -B build-core -- --libdir=/usr/lib --libexecdir=/usr/lib --enable-x86-sse --enable-plugin-freeipmi --with-math
+	cp -a tests build-core
+	cp -a web/gui/src build-core/web/gui
+
+ifeq (netdata-core-no-sse,$(findstring netdata-core-no-sse,$(PACKAGES)))
+	mkdir -p build-core-no-sse
+	dh_auto_configure -B build-core-no-sse -- --libdir=/usr/lib --libexecdir=/usr/lib --disable-x86-sse --enable-plugin-freeipmi --with-math
+	cp -a tests build-core-no-sse
+	cp -a web/gui/src build-core-no-sse/web/gui
+endif
+
+override_dh_auto_build:
+	dh_auto_build -B build-core
+
+ifeq (netdata-core-no-sse,$(findstring netdata-core-no-sse,$(PACKAGES)))
+	dh_auto_build -B build-core-no-sse
+endif
+
+override_dh_auto_install:
+	dh_auto_install -B build-core -- DESTDIR=$(CURDIR)/debian/tmp
+
+ifeq (netdata-core-no-sse,$(findstring netdata-core-no-sse,$(PACKAGES)))
+	dh_auto_install -B build-core-no-sse -- DESTDIR=$(CURDIR)/debian/tmp-core-no-sse
+endif
+
+override_dh_install-arch:
+	find debian/tmp -name .keep -delete
+
+	# Copy architecture dependent plugins
+	mkdir -p $(TOP)-core/etc/netdata
+	cp debian/local/netdata.conf $(TOP)-core/etc/netdata
+	touch $(TOP)-core/etc/netdata/.opt-out-from-anonymous-statistics
+
+	mkdir -p $(TOP)-core/usr/lib/netdata/plugins.d
+	for plugin in cgroup-network apps.plugin freeipmi.plugin; \
+	do \
+		cp debian/tmp/usr/lib/netdata/plugins.d/$${plugin} \
+		   $(TOP)-core/usr/lib/netdata/plugins.d; \
+	done
+
+ifeq (netdata-core-no-sse,$(findstring netdata-core-no-sse,$(PACKAGES)))
+	find debian/tmp-core-no-sse -name .keep -delete
+	dh_install -p netdata-core-no-sse --sourcedir=debian/tmp-core-no-sse
+
+	mkdir -p $(TOP)-core-no-sse/etc/netdata
+	cp debian/local/netdata.conf $(TOP)-core-no-sse/etc/netdata
+	touch $(TOP)-core-no-sse/etc/netdata/.opt-out-from-anonymous-statistics
+
+	mkdir -p $(TOP)-core-no-sse/usr/lib/netdata/plugins.d
+	for plugin in cgroup-network apps.plugin freeipmi.plugin; \
+	do \
+		cp debian/tmp-core-no-sse/usr/lib/netdata/plugins.d/$${plugin} \
+		   $(TOP)-core-no-sse/usr/lib/netdata/plugins.d; \
+	done
+
+	dh_install -a --remaining-packages
+else
+	dh_install -a
+endif
+
+override_dh_install-indep:
+	find debian/tmp -name .keep -delete
+
+	dh_install -i
+
+	# Move architecture dependent plugins
+	mkdir -p $(TOP)-core/usr/lib/netdata/plugins.d
+	for plugin in cgroup-network apps.plugin freeipmi.plugin; \
+	do \
+		mv -f $(TOP)-plugins-bash/usr/lib/netdata/plugins.d/$${plugin} \
+		   $(TOP)-core/usr/lib/netdata/plugins.d; \
+	done
+
+	mkdir -p $(TOP)-plugins-nodejs/usr/lib/netdata/plugins.d
+	for plugin in node.d.plugin; \
+	do \
+		mv $(TOP)-plugins-bash/usr/lib/netdata/plugins.d/$${plugin} \
+		   $(TOP)-plugins-nodejs/usr/lib/netdata/plugins.d; \
+	done
+
+	mkdir -p $(TOP)-plugins-python/usr/lib/netdata/plugins.d
+	for plugin in python.d.plugin; \
+	do \
+		mv $(TOP)-plugins-bash/usr/lib/netdata/plugins.d/$${plugin} \
+		   $(TOP)-plugins-python/usr/lib/netdata/plugins.d; \
+	done
+
+	# Setting package version (update check)
+	echo $(VERSION) > $(TOP)-web/usr/share/netdata/web/version.txt
+
+override_dh_installinit:
+	dh_installinit -p netdata-core --name=netdata
+	dh_installinit -p netdata-core-no-sse --name=netdata
+	dh_installinit --remaining-packages
+
+override_dh_installsystemd:
+	dh_installsystemd -p netdata-core --name=netdata
+	dh_installsystemd -p netdata-core-no-sse --name=netdata
+	dh_installinit --remaining-packages
+
+override_dh_installlogrotate:
+	dh_installlogrotate -p netdata-core --name=netdata
+	dh_installlogrotate -p netdata-core-no-sse --name=netdata
+	dh_installlogrotate --remaining-packages
+
+override_dh_missing:
+	dh_missing --fail-missing
+
+override_dh_fixperms-arch:
+	dh_fixperms -a
+
+	# apps.plugin should only be runnable by the netdata user. It will be
+	# given extra capabilities in the postinst script.
+	chmod 0754 $(TOP)-core/usr/lib/netdata/plugins.d/apps.plugin
+	chmod 4754 $(TOP)-core/usr/lib/netdata/plugins.d/freeipmi.plugin
+ifeq (netdata-core-no-sse,$(findstring netdata-core-no-sse,$(PACKAGES)))
+	chmod 0754 $(TOP)-core-no-sse/usr/lib/netdata/plugins.d/apps.plugin
+	chmod 4754 $(TOP)-core-no-sse/usr/lib/netdata/plugins.d/freeipmi.plugin
+endif
+
+override_dh_fixperms-indep:
+	dh_fixperms -i
+
+	# apps.plugin should only be runnable by the netdata user. It will be
+	# given extra capabilities in the postinst script.
+	chmod 0644 $(TOP)-plugins-bash/usr/lib/netdata/charts.d/*.sh
+	chmod 0644 $(TOP)-plugins-bash/usr/lib/netdata/plugins.d/*.sh.inc
+	chmod 0644 $(TOP)-plugins-python/usr/lib/netdata/python.d/*.py

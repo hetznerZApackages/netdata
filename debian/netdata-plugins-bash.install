@@ -1,0 +1,6 @@
+etc/netdata/charts.d
+usr/lib/netdata/charts.d/*.sh
+usr/lib/netdata/conf.d/charts.d
+usr/lib/netdata/conf.d/charts.d.conf
+usr/lib/netdata/conf.d/fping.conf
+usr/lib/netdata/plugins.d

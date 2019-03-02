@@ -1,0 +1,482 @@
+netdata (1.12.1-2~bpo9+1) stretch-backports; urgency=medium
+
+  * Rebuild for stretch-backports.
+
+ -- Federico Ceratto <federico@debian.org>  Sat, 02 Mar 2019 08:34:01 +0000
+
+netdata (1.12.1-2) unstable; urgency=medium
+
+  * Downgrading nodejs depends in netdata-plugins-nodejs to recommends as
+    not all architectures have nodejs at the moment.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Wed, 27 Feb 2019 22:09:05 +0100
+
+netdata (1.12.1-1) unstable; urgency=medium
+
+  [ Lennart Weller ]
+  * Add patch to remove Google Analytics from generated docs
+
+  [ Daniel Baumann ]
+  * Rediffing remove-googleanalytics.patch.
+  * Opting out by default from sending anonymous statistics (Closes: #923114).
+  * Merging upstream version 1.12.1.
+  * Refreshing remove-googleanalytics.patch for new upstream version.
+  * Updating lintian overrides.
+  * Removing currently usless depends on bash as it's still an essential
+    package.
+  * Adding missing GPL-3-only license stanza in copyright file.
+  * Debranding license references in copyright.
+  * Updating TODO file.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sun, 24 Feb 2019 21:32:56 +0100
+
+netdata (1.12.0-1) unstable; urgency=medium
+
+  * Merging upstream version 1.12.0.
+  * Adding TODO file.
+  * Merging changelog from uploads to experimental.
+  * Updating copyright for new upstream version.
+  * Adding stanza for glyphicons in copyright file.
+  * Merging patches from experimental branch for new netdata upstream
+    version.
+  * Updating build-out-of-tree hacks in rules.
+  * Updating node plugins install file for upstream changes.
+  * Correcting wrong if statements in rules so that netdata-core-no-sse
+    actually gets binaries installed (Closes: #921649).
+  * Harmonizing path in install files to fix FTBFS.
+  * Updating TODO file.
+  * Workarounding different source directories and debhelper install files
+    FTBFS by installing netdata.conf manually.
+  * Correcting makefile conditionals for netdata-core-no-sse handling in
+    rules again to make them actually work.
+  * Enabling building of freeipmi plugin on netdata-core-no-sse too.
+  * Updating manpage for current upstream version.
+  * Updating watch file for non-repackaged upstream tarballs.
+  * Moving files not directly interpreted by debhelper to subdirectories
+    within the debian packaging.
+  * Adding provides for netdata-plugins in control.
+  * Shamelessly adding myself in copyright.
+  * Sorting patches into comonly used subdirectories.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sun, 10 Feb 2019 13:30:34 +0100
+
+netdata (1.11.1+dfsg-7) unstable; urgency=high
+
+  * Marking sse2-support depends as i386-only.
+  * Correcting wrong bugnumer in previous changelog.
+  * Removing ExecReload from systemd unit (Closes: #921279).
+  * Removing netdata user on purge, not on remove to make logrotate not
+    fail on missing users (Closes: #920697).
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Mon, 04 Feb 2019 12:43:11 +0100
+
+netdata (1.11.1+dfsg-6) unstable; urgency=high
+
+  * Disabling gitlab-ci for the moment until we get it working.
+  * Fixing rules when building binary-any only (Closes: #920837).
+  * Using consistent naming for internal build directories.
+  * Disabling debhelper verbose output during build.
+  * Updating copyright file with missing entries (Closes: #920671).
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sun, 03 Feb 2019 13:29:18 +0100
+
+netdata (1.11.1+dfsg-5) unstable; urgency=medium
+
+  * Moving netdata plugins to /usr/lib/netdata.
+  * Renaming netdata-data to netdata-web.
+  * Moving architecture-independent plugins to interpreter specific
+    netdata-plugins packages to installations with targeted/minimized
+    depends.
+  * Renaming netdata to netdata-core, making netdata a meta package
+    depending on the (typical) netdata components that it contained before
+    the package reshuffeling.
+  * Renumbering patches.
+  * Adding netdata-core-no-sse on i386 with SSE2 optimizations turned off.
+  * Updating TODO file.
+  * Updating depends between packages for binNMU-safety.
+  * Removing TODO file, keeping it in the experimental branch.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sun, 27 Jan 2019 21:52:00 +0100
+
+netdata (1.12.0~rc3-2) experimental; urgency=medium
+
+  * Repeating Section for binary packages in control.
+  * Reordering, formating and ordering maintainer scripts to make them
+    more robust (Closes: #919973).
+  * Correcting spelling typo in netdata.conf comments.
+  * Sorting netdata.install file.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sun, 27 Jan 2019 12:42:30 +0100
+
+netdata (1.11.1+dfsg-4) unstable; urgency=medium
+
+  * Repeating Section for binary packages in control.
+  * Reordering, formating and ordering maintainer scripts to make them
+    more robust (Closes: #919973).
+  * Correcting spelling typo in netdata.conf comments.
+  * Sorting netdata.install file.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sun, 27 Jan 2019 12:42:01 +0100
+
+netdata (1.12.0~rc3-1) experimental; urgency=medium
+
+  * Merging upstream version 1.12.0~rc3.
+  * Removing debian-use-system-packaging.patch, not needed anymore.
+  * Refreshing debian-use-system-python.patch.
+  * Refreshing debian-use-system-exim4.patch.
+  * Refreshing debian-use-python3.patch.
+  * Refreshing debian-remove-infographic.patch.
+  * Refreshing debian-remove-contrib-files.patch.
+  * Refreshing netdata-support-symlinks.patch.
+  * Refreshing gui-remove-update-button.patch.
+  * Refreshing gui-remove-social-media-buttons.patch.
+  * Renumbering patches.
+  * Adding glyphicons to debian/copyright.
+  * Removing notes about files excluded from the upstream tarball as the
+    unmodified upstream tarball is used instead.
+  * Updating todo file.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sun, 20 Jan 2019 10:23:51 +0100
+
+netdata (1.11.1+dfsg-3) unstable; urgency=medium
+
+  * Building with dh_missing --fail-missing.
+  * Using passwd instead of adduser to lower depends footprint.
+  * Using build-depends to specify debhelper compat level instead of
+    d/compat.
+  * Using consistent formatting of comments in netdata-data.links.
+  * Using /bin/sh in netdata.init as it doesn't contain any bashisms.
+  * Fixing a few inconsistent indentings in netdata.init.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sun, 20 Jan 2019 08:46:54 +0100
+
+netdata (1.11.1+dfsg-2) unstable; urgency=medium
+
+  * brown paper bag: I've built the wrong branch by accident that had
+    WIP maintainer scripts, uploading the proper 1.11.1+dfsg-1 now.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Mon, 31 Dec 2018 20:05:07 +0100
+
+netdata (1.11.1+dfsg-1) unstable; urgency=medium
+
+  * Temporarily disable use of SSE to make netdata usable on old machines
+    (Closes: #879765).
+  * Removing debconf-handling of health_alarm_notify.conf for now, will
+    reintroduce it properly with ucf after some reworking/generalization
+    (Closes: #904459).
+  * Updating TODO file.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Mon, 31 Dec 2018 19:11:39 +0100
+
+netdata (1.11.1+dfsg-1~exp4) experimental; urgency=medium
+
+  * Building on linux only, building on kfreebsd doesn't really work at
+    the moment.
+  * Writing exact package version into web/version.txt.
+  * Writing exact version number into netdata itself.
+  * Preserving unmodified configure.ac during builds to not fail to build
+    twice in a row (workaround for #728029).
+  * Removing double lintian overrides for jquery.
+  * Readding misc:Pre-Depends for init-system-helpers.
+  * Correcting spelling typo in changelog.
+  * Updating local netdata manpage for current upstream version.
+  * Adding gauge-1.3.2.js symlink in missing-sources to please lintian.
+  * Enabling freeimpi plugin.
+  * Making freeipmi.plugin setuid root.
+  * Updating lintian overrides.
+  * Removing .keep files globaly.
+  * Updating TODO file.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Mon, 31 Dec 2018 12:06:03 +0100
+
+netdata (1.11.1+dfsg-1~exp3) experimental; urgency=medium
+
+  * Removing unused PERMS placeholder in postinst.
+  * Adding dep-header in compile-on-kfreebsd.patch.
+  * Updating package descriptions based on upstream documentation.
+  * Adding TODO file.
+  * Update spelling of upstream project name in copyright.
+  * Adding patch to hide social-media buttons in navbar to declutter the
+    interface.
+  * Splitting some patches and grouping them thematically together.
+  * Moving source lintian-overrides to their preferred location.
+  * Adding build-depends on freebsd-glue to try to fix remaining FTBFS on
+    kfreebsd.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sun, 30 Dec 2018 21:52:56 +0100
+
+netdata (1.11.1+dfsg-1~exp2) experimental; urgency=medium
+
+  * Minimizing depends wrt/ versions prior stretch.
+  * Removing notes about autoreconf in rules, this is run by dh 10 by
+    default already.
+  * Running wrap-and-sort -bast on debian packaging.
+  * Removing unused misc:Pre-Depends, used to be needed for early multi-
+    arch only.
+  * Removing unused shlibs:Depends on netdata-data which is arch-all
+    anyway.
+  * Adding new patch to try building on kfreebsd.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sat, 29 Dec 2018 08:30:52 +0100
+
+netdata (1.11.1+dfsg-1~exp1) experimental; urgency=medium
+
+  * Merging upstream version 1.11.1+dfsg
+  * Bumping changelog.
+  * Refreshing python-libraries-removed-from-make.patch.
+  * Refreshing remove-file-serve-restrictions-for-symlinks.patch.
+  * Refreshing hide-update-button.patch, using comment instead of
+    'display: none' which is rendering-friendlier.
+  * Refreshing Debianize-path-to-exim4-binary.patch.
+  * Refreshing remove-infographic-for-privacy-breach-reasons.patch,
+    removing removal of infographic.html via diff, not needed anymore.
+  * Refreshing Force-usage-of-python3.patch.
+  * Refreshing Skip-debian-files-in-upstream-s-makefile.patch.
+  * Harmonizing patch filenames.
+  * Adding entries with CVE numbers to previous upstream version in debian
+    changelog.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Fri, 28 Dec 2018 17:54:28 +0100
+
+netdata (1.11.0+dfsg-1~exp1) experimental; urgency=medium
+
+  [ Federico Ceratto ]
+  * Update watch file
+
+  [ Daniel Baumann ]
+  * Merging upstream version 1.11.0+dfsg:
+    - Fixed JSON Header Injection (an attacker could send \n encoded in the
+      request to inject a JSON fragment into the response) [CVE-2018-18836].
+    - Fixed HTTP Header Injection (an attacker could send \n encoded in the
+      request to inject an HTTP header into the response) [CVE-2018-18837].
+    - Fixed LOG Injection (an attacker could send \n encoded in the request
+      to inject a log line at access.log) [CVE-2018-18838].
+  * Updating excluded files in copyright file.
+  * Updating upstream url in various debian packaging files.
+
+  [ Federico Ceratto ]
+  * Update debian/watch pattern
+
+  [ Lennart Weller ]
+  * Updated patches for 1.11
+
+  [ Federico Ceratto ]
+  * Move overrides to netdata-data.lintian-overrides
+  * Update copyright
+  * Add Recommends
+  * Add overrides
+  * Update copyright: file locations
+  * Add lintian overrides
+  * Add install path
+  * Sort installs
+  * Remove dh-autoreconf dep
+  * Update copyright
+
+  [ Daniel Baumann ]
+  * Updating to debhelper compat 12.
+  * Updating to standards version 4.3.0.
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Fri, 28 Dec 2018 15:29:13 +0100
+
+netdata (1.10.0+dfsg-3) unstable; urgency=medium
+
+  * Running wrap-and-sort on debian/control.
+  * Updating to standards version 4.2.1.
+  * Adding patch from Sander Klein <debian-bugs@roedie.nl> to force
+    python3 (Closes: #906329).
+  * Adding patch to skip debian files in upstream's makefile, thanks to
+    Sander Klein <debian-bugs@roedie.nl>.
+  * Removing superfluous comma in copyright file.
+  * Adding new cgroup-network binary in netdata package, thanks to Sander
+    Klein <debian-bugs@roedie.nl> (Closes: #907550).
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Fri, 31 Aug 2018 11:27:56 +0200
+
+netdata (1.10.0+dfsg-2) unstable; urgency=medium
+
+  [ Lennart Weller ]
+  * Add support for kfreebsd/hurd
+
+  [ Daniel Baumann ]
+  * Updating my email address in uploaders field.
+  * Adding initial Russian debconf translations from Lev Lamberov
+    <dogsleg@debian.org> (Closes: #898185).
+  * Adding initial Portuguese debconf translations from Rui Branco
+    <ruipb@debianpt.org> (Closes: #898291).
+  * Adding initial French debconf translations from Alban Vidal
+    <alban.vidal@zordhak.fr> (Closes: #898829).
+  * Updating year in copyright for current upstream version.
+  * Adding initial Dutch debconf translations from Frans Spiesschaert
+    <Frans.Spiesschaert@yucom.be> (Closes: #899023).
+  * Removing explicit use of --parallel in rules, this is already used by
+    default with the currently used debhelper version.
+  * Updating watch file to version 4, no changes required.
+  * Adding Rules-Requires-Root filed in control.
+  * Updating standards version to 4.1.5, no changes required.
+  * Adding patch from Sander Klein <debian-bugs@roedie.nl> to fix the
+    python config directory path (Closes: #904134).
+  * Updating to standards version 4.2.0.
+  * Adding initial German debconf translations from Helge Kreutzmann
+    <debian@helgefjell.de> (Closes: #905759).
+
+  [ Federico Ceratto ]
+  * Add CI conf
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sat, 25 Aug 2018 16:52:52 +0200
+
+netdata (1.10.0+dfsg-1) unstable; urgency=medium
+
+  [ Federico Ceratto ]
+  * New upstream release
+
+  [ Lennart Weller ]
+  * Patch by Daniel Baumann to enable SEND_EMAILS configuration
+    (Closes: #888815)
+  * Patch by Simon Deziel to fallback to suid in containers (Closes: #890139)
+  * Added Daniel Baumann <daniel@debian.org> to Uploaders
+
+ -- Federico Ceratto <federico@debian.org>  Thu, 03 May 2018 11:40:30 +0100
+
+netdata (1.9.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #885634)
+
+ -- Federico Ceratto <federico@debian.org>  Fri, 26 Jan 2018 23:57:51 +0000
+
+netdata (1.8.0+dfsg-1) unstable; urgency=medium
+
+  [ Lennart Weller ]
+  * New upstream release
+  * Maintscript update to hopefully rename old config files (Closes: #869200)
+
+ -- Federico Ceratto <federico@debian.org>  Tue, 19 Sep 2017 18:40:00 +0100
+
+netdata (1.7.0+dfsg-1) unstable; urgency=medium
+
+  [ Lennart Weller ]
+  * New upstream release (Closes: #868662)
+  * Rudimentary solution to the sysvinit conundrum (Closes: #861713)
+  * Remove old config files from <1.6.0 with maintscript (Closes: #869200)
+  * Add a recommendation for curl. Fixing telegram pushes (Closes: #872799)
+
+  [ Federico Ceratto ]
+  * Remove James Cowgill from Uploaders (Closes: #872245)
+
+ -- Federico Ceratto <federico@debian.org>  Thu, 24 Aug 2017 19:38:48 +0100
+
+netdata (1.6.0+dfsg-3~bpo9+1) stretch-backports; urgency=medium
+
+  * Rebuild for stretch-backports
+
+ -- Federico Ceratto <federico@debian.org>  Sat, 15 Jul 2017 20:15:59 +0100
+
+netdata (1.6.0+dfsg-3) unstable; urgency=medium
+
+  * Add fping Recommends and CAP_NET_RAW capability (Closes: #864370)
+
+ -- Federico Ceratto <federico@debian.org>  Sat, 15 Jul 2017 19:46:27 +0100
+
+netdata (1.6.0+dfsg-2) unstable; urgency=medium
+
+  [ Lennart Weller ]
+  * Change logrotate to only re-open logfiles
+  * Change pidfile to existing location for sysvinit (Closes: #861713)
+  * Change After network to After network-online (Closes: #862455)
+
+ -- Federico Ceratto <federico@debian.org>  Sat, 27 May 2017 12:40:39 +0100
+
+netdata (1.6.0+dfsg-1) unstable; urgency=medium
+
+  [ Federico Ceratto ]
+  * New upstream release (Closes: #858757)
+
+  [ Lennart Weller ]
+  * Make all of /var writeable avoiding any other MTA problems (Closes: #856502)
+  * Add CAP_SETUID permission for the service (Closes: #856500)
+  * Change logrotate to weekly (Closes: #857305)
+    We do the weekly logrotate for now as SIGHUP is not working correctly.
+    See https://github.com/netdata/netdata/issues/805
+
+ -- Federico Ceratto <federico@debian.org>  Wed, 03 May 2017 14:21:50 +0100
+
+netdata (1.5.0+dfsg-4) unstable; urgency=medium
+
+  * Update service unit configuration (Closes: #856412)
+  * Fix exim path, thanks to Sven Hartge (Closes: #856252)
+
+ -- Federico Ceratto <federico@debian.org>  Wed, 01 Mar 2017 11:53:38 +0000
+
+netdata (1.5.0+dfsg-3) unstable; urgency=medium
+
+  * Update service unit configuration (Closes: #851852)
+
+ -- Federico Ceratto <federico@debian.org>  Sun, 26 Feb 2017 23:58:43 +0000
+
+netdata (1.5.0+dfsg-2) unstable; urgency=medium
+
+  [ Lennart Weller ]
+  * Include node.d modules now as we recommend nodejs (Closes: #856182)
+  * Move data dependencies to data package
+
+ -- Federico Ceratto <federico@debian.org>  Sun, 26 Feb 2017 18:27:33 +0000
+
+netdata (1.5.0+dfsg-1) unstable; urgency=medium
+
+  [ Lennart Weller ]
+  * New upstream release (Closes: #850004, #854401)
+  * Removed unnecessary patches
+  * Fixed lintian-overrides
+  * Fixed script permissions
+  * Include versioned assets
+
+ -- Federico Ceratto <federico@debian.org>  Sun, 12 Feb 2017 14:03:06 +0000
+
+netdata (1.4.0+dfsg-3) unstable; urgency=medium
+
+  * Install Python plugins
+  * Add alarm-notify.sh (Closes: #848730)
+  * Adjust OOM score (Closes: #848642)
+  * Fix dh_fixperms (Closes: #848351)
+
+ -- Federico Ceratto <federico@debian.org>  Mon, 02 Jan 2017 20:35:53 +0000
+
+netdata (1.4.0+dfsg-2) unstable; urgency=medium
+
+  * Fix init script
+
+ -- Federico Ceratto <federico@debian.org>  Fri, 23 Dec 2016 18:30:45 +0000
+
+netdata (1.4.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #848311)
+
+ -- Federico Ceratto <federico@debian.org>  Sun, 18 Dec 2016 23:59:27 +0000
+
+netdata (1.3.0+dfsg-1) UNRELEASED; urgency=medium
+
+  [ Lennart Weller ]
+  * New upstream version. Fixes license issues
+  * Add missing config files
+  * Further restrict process permissions
+
+ -- Federico Ceratto <federico@debian.org>  Sat, 08 Oct 2016 16:43:43 +0100
+
+netdata (1.2.0+dfsg-2) unstable; urgency=low
+
+  * Remove Multi-Arch from binary package
+  * Fix Vcs-links
+
+ -- Lennart Weller <lhw@ring0.de>  Fri, 22 Jul 2016 16:09:04 +0200
+
+netdata (1.2.0+dfsg-1) unstable; urgency=low
+
+  [ Federico Ceratto ]
+  * Initial release (Closes: #819661)
+  * Removed update button
+
+  [ Lennart Weller ]
+  * Split the main package into appropriate sub packages
+  * DFSG-compliant via debian/copyright file removal
+  * Linked to Javascript packages available in debian
+
+ -- Lennart Weller <lhw@ring0.de>  Fri, 22 Jul 2016 11:28:50 +0200

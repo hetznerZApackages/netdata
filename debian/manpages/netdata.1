@@ -1,0 +1,119 @@
+.TH NETDATA 1 2019\-01\-20 1.12.0 "real\-time performance monitoring"
+
+.SH NAME
+\fBnetdata\fR \- real\-time performance monitoring
+
+.SH SYNOPSIS
+\fBnetdata\fR [\-c \fIOPTIONS\fR] [\-D|\-d] [\-P \fIFILENAME\fR] [\-i \fIIP\fR] [\-p \fIPORT\fR] [\-s \fIPATH\fR] [\-t \fISECONDS\fR] [\-u \fIUSERNAME\fR]
+.PP
+\fBnetdata\fR \-h
+\fBnetdata\fR \-v|\-V
+
+.SH DESCRIPTION
+\fBnetdata\fR is distributed, real\-time, performance and health monitoring for
+systems and applications. It provides insights of everything happening on the
+systems it runs using interactive web dashboards.
+.PP
+It can run autonomously without any third party components or it can be
+integrated to existing monitoring tool chains (Prometheus, Graphite,
+OpenTSDB, Kafka, Grafana, etc).
+
+.SH OPTIONS
+The \fBnetdata\fR daemon is usually started by an initscript or a systemd
+service, the following options are available:
+
+.IP "\-c \fIFILENAME\fR" 4
+Configuration file to load.
+.br
+Default: /etc/netdata/netdata.conf.
+
+.IP "\-D" 4
+Do not fork. Run in the foreground.
+.br
+Default: run in the background
+
+.IP "\-d" 4
+Fork. Run in the background.
+.br
+Default: run in the background
+
+.IP "\-h" 4
+Display this help message.
+
+.IP "\-P \fIFILENAME\fR" 4
+File to save a pid while running.
+.br
+Default: do not save pid to a file
+
+.IP "\-i \fIIP\fR" 4
+The IP address to listen to.
+.br
+Default: all IP addresses IPv4 and IPv6
+
+.IP "\-p \fIPORT\fR" 4
+API/Web port to use.
+.br
+Default: 19999
+
+.IP "\-s \fIPATH\fR" 4
+Prefix for /proc and /sys (for containers).
+.br
+Default: no prefix
+
+.IP "\-t \fISECONDS\fR" 4
+The internal clock of netdata.
+.br
+Default: 1
+
+.IP "\-u \fIUSERNAME\fR" 4
+Run as user.
+.br
+Default: netdata
+
+.IP "\-v, \-V" 4
+Print netdata version and exit.
+
+.IP "\-W \fIOPTIONS\fR" 4
+See Advanced options below.
+
+.SS ADVANCED OPTIONS
+
+.IP "\-W stacksize=\fIN\fR" 4
+Set the stacksize (in bytes).
+
+.IP "\-W debug_flags=\fIN\fR" 4
+Set runtime tracing to debug.log.
+
+.IP "\-W unittest" 4
+Run internal unittests and exit.
+
+.IP "\-W set \fISECTION\fR \fIOPTION\fR \fIVALUE\fR" 4
+set netdata.conf option from the command line.
+
+.IP "\-W simple\-pattern \fIPATTERN\fR \fISTRING\fR" 4
+Check if string matches pattern and exit.
+
+.SH SIGNALS
+
+.IP "HUP" 4
+Close and reopen log files.
+
+.IP "USR1" 4
+Save internal DB to disk.
+
+.IP "USR2" 4
+Reload health configuration.
+
+.SH FILES
+.IP "\fB/etc/netdata\fR" 4
+Configuration file.
+.IP "\fB/usr/share/doc/netdata" 4
+Upstream documentation.
+
+.SH HOMEPAGE
+More information about netdata can be found on the homepage at <\fIhttps://my-netdata.io\fR> and in the manual at <\fIhttps://docs.netdata.cloud\fR>.
+
+.SH AUTHOR
+netdata was written by Costa Tsaousis <\fIcosta@tsaousis.gr\fR>.
+.PP
+This manual page was written by Federico Ceratto <\fIfederico@debian.org\fR> for the Debian project and may be used by others.

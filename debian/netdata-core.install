@@ -1,0 +1,10 @@
+etc/netdata/edit-config
+etc/netdata/health.d
+etc/netdata/statsd.d
+usr/lib/netdata/conf.d/apps_groups.conf
+usr/lib/netdata/conf.d/health.d
+usr/lib/netdata/conf.d/health_alarm_notify.conf
+usr/lib/netdata/conf.d/health_email_recipients.conf
+usr/lib/netdata/conf.d/statsd.d
+usr/lib/netdata/conf.d/stream.conf
+usr/sbin

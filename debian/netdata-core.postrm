@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	purge)
+		# removing directory overrides
+		for DIRECTORY in /var/cache/netdata /var/lib/netdata
+		do
+			if dpkg-statoverride --list | grep -qw "${DIRECTORY}"
+			then
+				dpkg-statoverride --remove "${DIRECTORY}"
+			fi
+		done
+
+		# removing user
+		if getent passwd netdata > /dev/null 2>&1
+		then
+			userdel netdata || echo "Unable to remove netdata user"
+		fi
+
+		# removing group
+		if getent group netdata > /dev/null 2>&1
+		then
+			groupdel netdata || echo "Unable to remove netdata group"
+		fi
+
+		# removing directories
+		rm -rf /var/cache/netdata /var/lib/netdata /var/log/netdata
+		;;
+
+	remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+
+		;;
+
+	*)
+		echo "postrm called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+#DEBHELPER#
+
+exit 0
