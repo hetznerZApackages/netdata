@@ -1,3 +1,9 @@
+netdata (1.12.1-2~bpo9+1+hetz1~exp1) stretch-hetz-experimental; urgency=medium
+
+  * Initial build from stretch-backports
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Mon, 24 Jun 2019 15:29:12 +0200
+
 netdata (1.12.1-2~bpo9+1) stretch-backports; urgency=medium
 
   * Rebuild for stretch-backports.
