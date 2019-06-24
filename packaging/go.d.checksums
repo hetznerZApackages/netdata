@@ -1,0 +1,16 @@
+857c6d84e5db45d99d7a8295f970d4d96007eddce7429e5584bc747632b2bcf6 *config.tar.gz
+4afcb44af0f79e70e9e841d6e35bdee957b90185a69fdfdfc18f778b6ad91681 *go.d.plugin-v0.1.0.darwin-386
+1f8ae79a1e82c364f879a099b437bdeae8204a4a8b639280984fd1b97193f682 *go.d.plugin-v0.1.0.darwin-amd64
+55280aebe32c0ffa064798727565fdaa5995fcd358ab73c068cd1d22616159b3 *go.d.plugin-v0.1.0.freebsd-386
+03d43d541810f584d98b098907ed69f9fffed10da1023a1813cafe6ed4ad5b7f *go.d.plugin-v0.1.0.freebsd-amd64
+8ad1fa8bcb88ef2df2ceb76eab8fef59b07f14bc96eb4261ec59fae5b50227d3 *go.d.plugin-v0.1.0.freebsd-arm
+0b6ce1f98f7ae2a7843ef2a0e0f8e67142b7200632b3b2a7fbbba073086d028e *go.d.plugin-v0.1.0.linux-386
+f8ef904b24fbbaf0ef861cdf4a578552bd680fcbe97035871dc183929bbc38e2 *go.d.plugin-v0.1.0.linux-amd64
+eaa07ae33bb32506ed8e7e40bfe9ba55269ecccea711118fe15946630b8727c0 *go.d.plugin-v0.1.0.linux-arm
+4b4d88b1b373ee5b8f544beb8827aa133a33cafd2340792607980b558e7552ba *go.d.plugin-v0.1.0.linux-arm64
+b5efceb892224dff90123b792bf0bf48908b9174061b90563fddf442ef5b26f8 *go.d.plugin-v0.1.0.linux-mips
+468a00d49e613dbfb0098c7e8072e2cf6c187a5a4ebc1c217a3af90c9b8c5dfe *go.d.plugin-v0.1.0.linux-mips64
+1e344d522641a947bf8c782a1018828a9b9a7feccfba8853f68b9348a2e95aa9 *go.d.plugin-v0.1.0.linux-mips64le
+3cc6e078fac931d9d56abd6f3f0bc474e7a09ec67b3e18c218654b244d772491 *go.d.plugin-v0.1.0.linux-mipsle
+edabb189b86ea92e29dfa02f5811f3db85e3cf08da66e7587e65241b526e8cd1 *go.d.plugin-v0.1.0.linux-ppc64
+5fb07c7410f60fd51e72d997132e70dd331ede69e7c07e4df379e8eb64e56716 *go.d.plugin-v0.1.0.linux-ppc64le
